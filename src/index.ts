@@ -15,6 +15,7 @@ import { COOKIE_AGE, SYNC_AT } from './constants';
 import { fetchBandcampData } from './services/bandcamp';
 import { getDownloadDir } from './utils/downloader';
 import cron from './services/cron';
+import rewrite from './middleware/rewrite';
 
 const app = new Koa();
 const router = new Router();
@@ -147,6 +148,8 @@ router.post('/', secure, async ctx => {
     updated: true,
   });
 });
+
+app.use(rewrite);
 
 app.use(router.routes()).use(router.allowedMethods());
 
