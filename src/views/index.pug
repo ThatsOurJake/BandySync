@@ -1,0 +1,31 @@
+html(lang="en")
+  head
+    include templates/head.pug
+    title Dashboard - Bandy Sync
+    style.
+      .hidden {
+        display: none;
+      }
+  body 
+    include templates/header.pug
+    if (updated)
+      p(style="color: green") Update Successful!
+    form(method="post") 
+      p Bandcamp Cookie
+      input(type="text", id="input-cookie", disabled=true, name="cookie", value=bandcampCookie)
+      p Sync at (hour of the day)
+      input(type="number", id="input-sync-at", name="syncAt", disabled=true, value=syncAt, min=0, max=23)
+      input(type="hidden", name="_token", value=csrfToken)
+      button(type="submit", class="hidden", id="btn-update") Update
+    button(type="button", id="btn-edit") Edit
+  script.
+    document.getElementById('btn-edit').addEventListener('click', (e) => {
+      const inputCookie = document.getElementById('input-cookie');
+      const inputSyncAt = document.getElementById('input-sync-at');
+      const btnSubmit = document.getElementById('btn-update')
+
+      inputCookie.disabled = false;
+      inputSyncAt.disabled = false;
+      btnSubmit.classList.remove('hidden');
+      e.target.classList.add('hidden');
+    });
