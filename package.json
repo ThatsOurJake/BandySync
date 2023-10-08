@@ -29,6 +29,8 @@
     "ts-node": "^10.9.1"
   },
   "scripts": {
-    "dev": "nodemon --watch src --ext ts --exec ts-node src/index.ts"
+    "dev": "nodemon --watch src --ext ts --exec ts-node src/index.ts",
+    "build": "tsc && cp -r src/views dist/views",
+    "start": "node dist/index.js"
   }
 }
