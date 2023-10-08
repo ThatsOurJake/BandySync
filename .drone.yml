@@ -1,0 +1,19 @@
+kind: pipeline
+name: default
+type: docker
+
+steps:
+- name: build-image
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: thatsourjake/bandy-sync
+    tags:
+      - latest
+      - "${DRONE_COMMIT_SHA:0:8}"
+  when:
+    branch:
+    - main
