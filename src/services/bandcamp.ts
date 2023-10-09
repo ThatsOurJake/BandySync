@@ -120,9 +120,14 @@ export const fetchBandcampData = async () => {
     };
   }, {});
 
-  logger.info(`Downloading ${Object.keys(filtered).length} items`);
+  const keyLength = Object.keys(filtered).length;
 
+  if (keyLength === 0) {
+    logger.info(`No items to sync!`);
+    return;
+  }
+
+  logger.info(`Downloading ${keyLength} items`);
   await downloadItems(filtered);
-
   logger.info(`Sync Complete!`);
 };
