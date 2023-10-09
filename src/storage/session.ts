@@ -43,10 +43,14 @@ const sessionBuilder = (cleanupInterval: number = 5, sessionExpiry: number = COO
       }
     });
 
+    if (cleanupCount === 0) {
+      return;
+    }
+
     logger.info(`${cleanupCount} sessions cleaned up`);
   };
 
-  setTimeout(cleanup, cleanupInterval * 60 * 1000);
+  setInterval(cleanup, cleanupInterval * 60 * 1000);
 
   logger.info(`Cleanup Job Started`);
 
