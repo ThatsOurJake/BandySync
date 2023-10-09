@@ -6,7 +6,7 @@ const cronHandler = () => {
   let crn: cron.ScheduledTask;
 
   const init = (hourToRun: number) => {
-    crn = cron.schedule(`* * ${hourToRun} * * *`, fetchBandcampData);
+    crn = cron.schedule(`0 0 ${hourToRun} * * *`, fetchBandcampData);
     logger.info(`Download will happen around ${hourToRun}:00`);
   };
 
