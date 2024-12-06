@@ -16,7 +16,7 @@
     "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "@types/adm-zip": "^0.5.2",
+    "@types/adm-zip": "^0.5.7",
     "@types/axios": "^0.14.0",
     "@types/cheerio": "^0.22.32",
     "@types/koa": "^2.13.9",

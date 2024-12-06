@@ -101,7 +101,8 @@ export const downloadItems = async (links: Dict) => {
         fs.mkdirSync(downloadFolder);
       }
 
-      const fileName = `${title}${fileExt}`;
+      const sanitisedTitle = title.replace(/[^a-z0-9]/gi, '_').replace(/_{2,}/g, '_');
+      const fileName = `${sanitisedTitle}${fileExt}`;
       const downloadLoc = path.join(downloadFolder, fileName);
 
       await download(downloadLink, downloadLoc, cfg.cookie, { artist, title });
@@ -109,7 +110,7 @@ export const downloadItems = async (links: Dict) => {
       if (isAlbum) {
         logger.info(`Unzipping [${title} - ${artist}]`);
         const zip = new Unzip(downloadLoc);
-        zip.extractAllTo(path.join(downloadFolder, title));
+        zip.extractAllTo(path.join(downloadFolder, sanitisedTitle));
         logger.info(`Unzipped [${title} - ${artist}]`);
 
         fs.rmSync(downloadLoc);
